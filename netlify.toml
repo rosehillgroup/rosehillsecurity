@@ -1,0 +1,7 @@
+[build]
+  publish = "."
+
+# Form handling
+[forms]
+  # Enable form processing
+  enabled = true

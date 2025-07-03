@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Rosehill Security</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Overpass:wght@300;400;500;600;700&family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            background: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        .header {
+            background: linear-gradient(135deg, #1a365d, #2d4a71);
+            color: white;
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 600;
+            font-family: 'Source Sans Pro', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo a {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .logo a:hover {
+            opacity: 0.8;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 6px;
+        }
+
+        .nav-menu a:hover {
+            background: rgba(255, 107, 53, 0.2);
+            color: #ff6b35;
+        }
+
+        .nav-menu a.active {
+            background: rgba(255, 107, 53, 0.2);
+            color: #ff6b35;
+            font-weight: 600;
+        }
+
+        .contact-btn {
+            background: #ff6b35;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        .contact-btn:hover {
+            background: #e55a2b !important;
+            transform: translateY(-2px);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 8px;
+            background: none;
+            border: none;
+            z-index: 1001;
+        }
+
+        .mobile-menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+
+        .mobile-menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+
+        .mobile-nav-menu {
+            display: none;
+            position: fixed;
+            top: 70px;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, #1a365d, #2d4a71);
+            flex-direction: column;
+            padding: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            z-index: 999;
+        }
+
+        .mobile-nav-menu.active {
+            display: flex;
+        }
+
+        .mobile-nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            transition: color 0.3s ease;
+        }
+
+        .mobile-nav-menu a:hover {
+            color: #ff6b35;
+        }
+
+        .mobile-nav-menu a.active {
+            color: #ff6b35;
+            font-weight: 600;
+        }
+
+        .mobile-nav-menu a:last-child {
+            border-bottom: none;
+        }
+
+        .mobile-nav-menu .contact-btn {
+            background: #ff6b35;
+            padding: 15px 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 10px;
+            border-bottom: none;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(26, 54, 93, 0.85), rgba(45, 74, 113, 0.85)), url('hero-background.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: white;
+            padding: 140px 0 100px;
+            position: relative;
+            overflow: hidden;
+            margin-top: 70px;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: linear-gradient(45deg, rgba(26, 54, 93, 0.4), rgba(45, 74, 113, 0.4)), 
+                              url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,107,53,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            background-size: cover, 50px 50px;
+            background-position: center, center;
+            background-repeat: no-repeat, repeat;
+            opacity: 1;
+            z-index: 1;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, 
+                rgba(26, 54, 93, 0.95) 0%, 
+                rgba(45, 74, 113, 0.85) 50%,
+                rgba(26, 54, 93, 0.95) 100%);
+            z-index: 2;
+            opacity: 0.8
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 3;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-family: 'Overpass', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 600;
+            margin-bottom: 25px;
+            letter-spacing: -1px;
+        }
+
+        .hero-strapline {
+            color: #ff6b35;
+            font-family: 'Overpass', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            opacity: 0.95;
+            margin-bottom: 40px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            font-family: 'Overpass', sans-serif;
+            color: #1a365d;
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #6c757d;
+            font-size: 1.2rem;
+            margin-bottom: 60px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .section-title::after {
+            content: '';
+            width: 80px;
+            height: 4px;
+            background: #ff6b35;
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Story Section */
+        .story-section {
+            background: white;
+            padding: 80px 0;
+        }
+
+        .story-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .story-text h3 {
+            font-family: 'Overpass', sans-serif;
+            color: #1a365d;
+            font-size: 2rem;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        .story-text p {
+            color: #495057;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .story-image {
+            height: 400px;
+            background: linear-gradient(135deg, #e9ecef, #dee2e6);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6c757d;
+            font-size: 1.2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .story-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            border-radius: 15px;
+        }
+
+        /* Values Section */
+        .values-section {
+            background: #f8f9fa;
+            padding: 80px 0;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        @media (min-width: 1200px) {
+            .values-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .value-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .value-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .value-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 107, 53, 0.1);
+            border: 3px solid #ff6b35;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            padding: 16px;
+            flex-shrink: 0;
+        }
+
+        .value-icon svg {
+            width: 48px;
+            height: 48px;
+            fill: #ff6b35;
+        }
+
+        .value-title {
+            font-family: 'Overpass', sans-serif;
+            color: #1a365d;
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .value-description {
+            color: #6c757d;
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+
+        /* Why Choose Section */
+        .why-choose-section {
+            background: linear-gradient(135deg, #1a365d, #2d4a71);
+            color: white;
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .why-choose-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="why-grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(255,107,53,0.05)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23why-grid)"/></svg>');
+            background-size: 40px 40px;
+            opacity: 0.5;
+            z-index: 1;
+        }
+
+        .why-choose-section .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .why-choose-section .section-title {
+            color: white;
+        }
+
+        .why-choose-section .section-subtitle {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .why-choose-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        @media (min-width: 1200px) {
+            .why-choose-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .why-choose-item {
+            padding: 30px 25px;
+            border-left: 4px solid #ff6b35;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .why-choose-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(10px);
+        }
+
+        .why-choose-item h4 {
+            font-family: 'Overpass', sans-serif;
+            color: #ff6b35;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .why-choose-item p {
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        /* Mission Section */
+        .mission-section {
+            background: white;
+            padding: 80px 0;
+        }
+
+        .mission-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .mission-content h3 {
+            font-family: 'Overpass', sans-serif;
+            color: #1a365d;
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        .mission-content p {
+            color: #495057;
+            line-height: 1.8;
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+        }
+
+        .mission-highlight {
+            background: #f8f9fa;
+            padding: 40px;
+            border-radius: 15px;
+            border-left: 5px solid #ff6b35;
+            margin-top: 40px;
+        }
+
+        .mission-highlight h4 {
+            font-family: 'Overpass', sans-serif;
+            color: #1a365d;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .mission-highlight p {
+            color: #495057;
+            font-size: 1.1rem;
+            margin-bottom: 0;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1a365d;
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            font-family: 'Overpass', sans-serif;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: #ff6b35;
+        }
+
+        .footer-section p,
+        .footer-section li {
+            opacity: 0.9;
+            line-height: 1.8;
+            margin-bottom: 10px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #ff6b35;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 30px;
+            text-align: center;
+            opacity: 0.8;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .story-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                text-align: center;
+            }
+            
+            .nav-menu {
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .mobile-menu-toggle {
+                display: flex;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+            }
+
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .why-choose-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="rosehill_security_white.png" height="60">
+                </a>
+            </div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="security-solutions.html">Security Solutions</a></li>
+                    <li><a href="ballistic-solutions.html">Ballistic Solutions</a></li>
+                    <li><a href="about-us.html" class="active">About Us</a></li>
+                    <li><a href="contact-us.html" class="contact-btn">Contact Us</a></li>
+                </ul>
+                <button class="mobile-menu-toggle" id="mobile-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <div class="mobile-nav-menu" id="mobile-menu">
+                    <a href="index.html">Home</a>
+                    <a href="security-solutions.html">Security Solutions</a>
+                    <a href="ballistic-solutions.html">Ballistic Solutions</a>
+                    <a href="about-us.html" class="active">About Us</a>
+                    <a href="contact-us.html" class="contact-btn">Contact Us</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>About Rosehill Security</h1>
+            <div class="hero-strapline">Innovation in Security & Ballistic Protection</div>
+            <p>We design and manufacture robust, rapidly deployable security and ballistic protection solutions that protect people, infrastructure, training facilities, and public spaces worldwide.</p>
+        </div>
+    </section>
+
+    <!-- Story Section -->
+    <section class="story-section">
+        <div class="container">
+            <div class="story-content">
+                <div class="story-text">
+                    <h3>Made in the UK. Deployed Worldwide.</h3>
+                    <p>At Rosehill Security, we specialise in rapidly deployable perimeter protection systems and advanced ballistic solutions designed to defend against unauthorised access, vehicle-borne threats, and ballistic risks. Our solutions combine speed of deployment with long-term durability, making security accessible and effective for any environment.</p>
+                    <p>All our products are manufactured in West Yorkshire from 100% recycled rubber, supporting sustainability goals while delivering proven performance. We work with governments, security contractors, rail operators, military organisations, law enforcement, and international partners to provide solutions that are quick to deploy, cost-effective, and maintenance-free.</p>
+                    <p>From hostile vehicle mitigation and anti-trespass panels to FB6-certified ballistic blocks and anti-ricochet tiles, we deliver practical security and ballistic protection solutions that protect without the disruption and cost of traditional infrastructure.</p>
+                </div>
+                <div class="story-image">
+                    <img src="Rosehill_Polymers_BeechRd.jpg">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="values-section">
+        <div class="container">
+            <h2 class="section-title">Our Core Values</h2>
+            <p class="section-subtitle">The principles that guide our approach to security innovation and customer service</p>
+            
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon">
+                        <svg id="Glyph" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 64 64">
+                            <path d="M38,16.1709v1.99902c0,3.81348,2.4541,7.16406,6,8.24316,3.5459-1.0791,6-4.42969,6-8.24316v-1.99902c-2.12988-.39844-4.17773-1.22168-6-2.41211-1.82129,1.19043-3.86914,2.01367-6,2.41211ZM47.33496,17.69922c.39062.39062.39062,1.02344,0,1.41406l-3.50391,3.50391c-.38397.38391-1.03119.38281-1.41406,0l-1.75195-1.75195c-.39062-.39062-.39062-1.02344,0-1.41406s1.02344-.39062,1.41406,0l1.04492,1.04492,2.79688-2.79688c.39062-.39062,1.02344-.39062,1.41406,0Z"/>
+                            <path d="M44,7c-7.16797,0-13,5.83154-13,13s5.83203,13,13,13,13-5.83154,13-13-5.83203-13-13-13ZM52,18.16992c0,4.80859-3.18262,9.02344-7.7403,10.24902-.17047.04504-.34918.04578-.51947,0-4.55762-1.22559-7.74023-5.44043-7.74023-10.24902v-2.85156c0-.50195.37207-.92578.86914-.99121,2.34961-.30957,4.61328-1.20605,6.54785-2.59277.34961-.25.81738-.25,1.16504,0,1.93652,1.38672,4.20117,2.2832,6.54883,2.59277.49707.06543.86914.48926.86914.99121v2.85156Z"/>
+                            <polygon points="19 45.7207 7 41.72095 7 43.61267 19 47.61279 19 45.7207"/>
+                            <polygon points="37 47.61279 49 43.61267 49 41.72095 37 45.7207 37 47.61279"/>
+                            <path d="M29.01001,20.29999l-.67999-.23999c-.21002-.08002-.45001-.08002-.66003,0l-19.66455,6.88257,19.99457,6.99786,6.55707-2.29486c-3.31592-2.69434-5.46271-6.77319-5.54706-11.34558Z"/>
+                            <path d="M7,35.61261l13.31641,4.43866c.52344.1748.80664.74115.63184,1.26508-.16608.49786-.73975.80731-1.26465.63239l-12.68359-4.22772v1.8916l13.31641,4.43866c.4082.13623.68359.51807.68359.94873v3.99988c0,.67041-.68701,1.15668-1.31641.94885l-12.68359-4.22772v3.27899c0,.41998.27002.79999.66998.94l19.33002,7.06v-21.29065l-20-6.99988v6.90314Z"/>
+                            <path d="M36.62225,33.04163l-7.62225,2.66772v21.29065l19.33002-7.06c.39996-.14001.66998-.52002.66998-.94v-3.27899s-12.68359,4.22772-12.68365,4.22772c-.63953.21112-1.31635-.27155-1.31635-.94873v-4c0-.43066.27539-.8125.68359-.94873l13.31641-4.43866v-1.8916s-12.63641,4.21198-12.68347,4.22766c-.49579.16528-1.08893-.10474-1.26477-.63226-.1748-.52393.1084-1.09033.63184-1.26514l13.31641-4.43866v-1.4726c-1.56.56-3.23999.85999-5,.85999-2.68256,0-5.19629-.71912-7.37775-1.95837Z"/>
+                        </svg>
+                    </div>
+                    <h3 class="value-title">Security First</h3>
+                    <p class="value-description">Every product we design prioritises protection and security effectiveness above all else.</p>
+                </div>
+
+                <div class="value-card">
+                    <div class="value-icon">
+                        <svg id="Glyph" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 64 64">
+                            <path d="M25,49c-4.63367,0-8.69751-2.44446-11-6.1037v14.1037h22v-14.1037c-2.30249,3.65924-6.36633,6.1037-11,6.1037Z"/>
+                            <path d="M25,25c-6.07001,0-11,4.92999-11,11s4.92999,11,11,11,11-4.92999,11-11-4.92999-11-11-11ZM29.89001,33.45001l-4.99994,9.99989c-.18909.37819-.68021.6302-1.12005.52007-.45001-.09998-.77002-.51001-.77002-.96997v-6h-2c-.31,0-.59998-.14001-.78998-.38-.19-.25-.25-.56-.17999-.85999l2-8c.10999-.45001.50995-.76001.96997-.76001h4c.29999,0,.58002.13.77002.37.19.22998.26996.52997.20996.83002l-.76001,3.79999h1.78003c.34998,0,.66998.17999.84998.46997.18005.29999.20001.67004.04004.98004Z"/>
+                            <path d="M25.22656,33.63379c-.18994-.23145-.26611-.53613-.20703-.83008l.76074-3.80371h-1.99951l-1.5,6h1.71924c.55225,0,1,.44727,1,1v2.76367l2.38184-4.76367h-1.38184c-.2998,0-.5835-.13477-.77344-.36621Z"/>
+                            <path d="M7,54c0,1.6543,1.3457,3,3,3h2V17h-5v37Z"/>
+                            <path d="M14,29.10345c2.30249-3.65924,6.36633-6.10345,11-6.10345s8.69751,2.44421,11,6.10345v-12.10345H14v12.10345Z"/>
+                            <path d="M43,10c0-1.6543-1.3457-3-3-3H10c-1.6543,0-3,1.3457-3,3v5h36v-5ZM12,12c-.55231,0-1-.44775-1-1,0-.55231.44769-1,1-1s1,.44769,1,1c0,.55225-.44769,1-1,1ZM34,12c-.55231,0-1-.44775-1-1,0-.55231.44769-1,1-1s1,.44769,1,1c0,.55225-.44769,1-1,1ZM38,12c-.55231,0-1-.44775-1-1,0-.55231.44769-1,1-1s1,.44769,1,1c0,.55225-.44769,1-1,1Z"/>
+                            <path d="M56,35h-1v-2c0-.55225-.44727-1-1-1s-1,.44775-1,1v2h-2v-2c0-.55225-.44727-1-1-1s-1,.44775-1,1v2h-1c-.55273,0-1,.44727-1,1v4c0,2.41443,1.7207,4.43427,4,4.89893v2.10107c0,1.6543-1.3457,3-3,3h-5V17h-5v40h2c1.6543,0,3-1.3457,3-3v-2h5c2.75684,0,5-2.24316,5-5v-2.10107c2.2793-.46466,4-2.4845,4-4.89893v-4c0-.55273-.44727-1-1-1Z"/>
+                        </svg>
+                    </div>
+                    <h3 class="value-title">Rapid Response</h3>
+                    <p class="value-description">Understanding that security needs are urgent, we provide solutions that deploy in minutes, not weeks.</p>
+                </div>
+
+                <div class="value-card">
+                    <div class="value-icon">
+                        <svg version="1.1" id="Glyph" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 64 64" enable-background="new 0 0 64 64" xml:space="preserve">
+                            <g>
+                                <path d="M14.11719,26.77344c0.45074,0.67767,1.51959,0.53296,1.78027-0.23242C17.78613,20.97363,22.36328,16.8252,28,15.48145 c0,0,0,0.5166,0,0.51855c0,0.78662,0.90021,1.26691,1.55469,0.83203l6-4C35.83301,12.64648,36,12.33398,36,12 s-0.16699-0.64648-0.44531-0.83203l-6-4c-0.30566-0.2041-0.70215-0.22363-1.02637-0.0498C28.20312,7.29199,28,7.63086,28,8v1.35352 c-7.18066,1.25586-13.34473,5.84863-16.60547,12.42188c-0.15918,0.32031-0.13477,0.7002,0.0625,0.99805 C11.45703,22.77344,14.10522,26.75537,14.11719,26.77344z"/>
+                                <path d="M56.87042,28.53387C56.70544,28.22626,56.38885,28,56,28h-1.35352c-1.25586-7.18066-5.84863-13.34473-12.42188-16.60547 c-0.32129-0.16113-0.7002-0.13477-0.99805,0.0625c0,0-3.9939,2.65613-4,2.66016c-0.68103,0.45288-0.5387,1.51764,0.23242,1.78027 C43.02637,17.78613,47.1748,22.36328,48.51855,28H48c-0.36914,0-0.70801,0.20312-0.88184,0.52832s-0.15527,0.71973,0.0498,1.02637 c0,0,3.99207,5.98804,4,5.99994c0.39093,0.58643,1.27441,0.58447,1.66406,0.00006c0,0,3.98975-5.98462,4-6 C57.04877,29.22955,57.03522,28.84113,56.87042,28.53387z"/>
+                                <path d="M49.88281,37.22656c-0.4527-0.68066-1.51733-0.53967-1.78027,0.23242C46.21387,43.02637,41.63672,47.1748,36,48.51855 c0,0,0-0.5163,0-0.51855c0-0.77795-0.90851-1.26147-1.55469-0.83203l-6,4C28.16699,51.35352,28,51.66602,28,52 s0.16699,0.64648,0.44531,0.83203l6,4C35.0932,57.26392,36,56.77985,36,56v-1.35352 c7.18066-1.25586,13.34473-5.84863,16.60547-12.42188c0.15918-0.32031,0.13477-0.7002-0.0625-0.99805 C52.54297,41.22656,49.89246,37.24109,49.88281,37.22656z"/>
+                                <path d="M26.54102,48.10254C20.97363,46.21387,16.8252,41.63672,15.48145,36c0,0,0.51764,0,0.51855,0 c0.78406,0,1.26984-0.90009,0.83203-1.55469l-4-6c-0.37109-0.55664-1.29297-0.55664-1.66406,0c0,0-3.99341,5.99011-4,6 C6.73151,35.09998,7.21613,36,8,36h1.35352c1.25586,7.18066,5.84863,13.34473,12.42194,16.60547 c0.32031,0.16016,0.70105,0.13373,0.99799-0.0625c0,0,3.98718-2.65167,3.99994-2.66016 C27.45435,49.42993,27.31018,48.36444,26.54102,48.10254z"/>
+                                <path d="M32.66406,19.25293c-0.3584-0.32031-0.89551-0.33984-1.27832-0.04199S22,26.60742,22,35c0,5.51367,4.48633,10,10,10 s10-4.48633,10-10C42,27.63574,33.0459,19.5918,32.66406,19.25293z M32,41c-3.30859,0-6-2.69141-6-6c0-0.55273,0.44727-1,1-1 s1,0.44727,1,1c0,2.20605,1.79395,4,4,4c0.55273,0,1,0.44727,1,1S32.55273,41,32,41z"/>
+                            </g>
+                        </svg>
+                    </div>
+                    <h3 class="value-title">Sustainability</h3>
+                    <p class="value-description">Committed to environmental responsibility through recycled materials and circular economy principles.</p>
+                </div>
+
+                <div class="value-card">
+                    <div class="value-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 64 64">
+                            <g>
+                                <g id="Glyph">
+                                    <g>
+                                        <path d="M15.00076,18.16557c0-.42999-.08588-.83649-.21204-1.22498l4.49268-2.85901c.71497.66711,1.66675,1.08398,2.71936,1.08398,2.20557,0,4-1.79443,4-4s-1.79443-4-4-4-4,1.79443-4,4c0,.42999.08588.83649.21204,1.22498l-4.49268,2.85901c-.71497-.66711-1.66675-1.08398-2.71936-1.08398-2.20557,0-4,1.79443-4,4,0,1.85828,1.27972,3.41071,3,3.85797v6.28406c-1.72028.44727-3,1.99969-3,3.85797,0,2.20557,1.79443,4,4,4s4-1.79443,4-4c0-1.85828-1.27972-3.41071-3-3.85797v-6.28406c1.72028-.44727,3-1.99969,3-3.85797Z"/>
+                                        <path d="M55.00027,17.70072l-14.72211-8.49982.49994-.86591c.27588-.47852.1123-1.08984-.36621-1.36621-.47998-.27686-1.09033-.11182-1.36621.36621l-5,8.66016c-.27588.47852-.1123,1.08984.36661,1.36644.47377.27253,1.09177.10821,1.36581-.36644l.49982-.86572,14.72234,8.5c1.85181,1.06915,4.37451.42277,5.46436-1.46435,1.10205-1.91016.44531-4.36133-1.46436-5.46436Z"/>
+                                        <path d="M52.00076,27.16557H18.00076c-1.10455,0-2,.89539-2,2,0,1.10455.89545,2,2,2h34c1.10455,0,2-.89545,2-2,0-1.10461-.89545-2-2-2Z"/>
+                                        <path d="M22.00076,39.43119v14.73438c0,1.6543,1.3457,3,3,3h24c1.6543,0,3-1.3457,3-3v-21H18.42056l3.5802,6.26562ZM45.00076,50.16557c-.55225,0-1-.44775-1-1s.44775-1,1-1h1v-2h-3c-.55225,0-1-.44775-1-1s.44775-1,1-1h3v-2h-1c-.55225,0-1-.44775-1-1s.44775-1,1-1h1v-2h-3c-.55225,0-1-.44775-1-1s.44775-1,1-1h4c.55225,0,1,.44775,1,1v16c0,.55225-.44775,1-1,1h-4c-.55225,0-1-.44775-1-1s.44775-1,1-1h3v-2h-1Z"/>
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>
+                    </div>
+                    <h3 class="value-title">Innovation</h3>
+                    <p class="value-description">Continuously developing new technologies and approaches to solve evolving security challenges.</p>
+                </div>
+
+                <div class="value-card">
+                    <div class="value-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 64 64">
+                            <g>
+                                <g id="Glyph">
+                                    <g>
+                                        <path d="M47.21002,42.62c-.19-.25-.25-.56-.17999-.85999l.68994-2.76001h-1.96997l-1.41998,5h1.66998c.29999,0,.58002.13.77002.37.19.22998.26996.52997.20996.83002l-.13995.66998,2.15997-2.87h-1c-.31,0-.59998-.14001-.78998-.38Z"/>
+                                        <path d="M47,34c-5.51001,0-10,4.48999-10,10s4.48999,10,10,10,10-4.48999,10-10-4.48999-10-10-10ZM51.79999,42.59998s-5.97644,7.96863-5.99994,7.99988c-.59259.79016-1.98627.25397-1.78003-.79987l.76001-3.79999h-1.78003c-.31,0-.60999-.15002-.79999-.40002s-.25-.57001-.16003-.87l2-7c.12-.42999.51001-.72998.96002-.72998h4c.31,0,.59998.14001.78998.38.19.25.25.56.17999.85999l-.68994,2.76001h1.71997c.38,0,.71997.20996.89001.54999.16998.34003.14001.75-.09003,1.04999Z"/>
+                                        <path d="M19.10156,18.43262l2.52246,1.26172c.78418.3916,1.35547,1.10449,1.56836,1.95605l.45898,1.83496c.09766.38672.41309.67871.80566.74414l3.25.54102c.43848.06934.86133-.14355,1.05859-.53906l.65625-1.3125c.60254-1.20703,1.94531-1.86523,3.27246-1.59961l2.78711.55762c.69043.1377,1.31445.5166,1.75488,1.06836l2.67383,3.34082c.25977.3252.69922.45605,1.0957.32422l.95312-.31738c.2334-.07812.42969-.23828.55176-.45215l3.34076-5.84631c-3.70386-5.9856-10.30975-9.99451-17.8515-9.99451-4.17578,0-8.06091,1.2392-11.33447,3.34857l1.96436,4.58405c.09277.2168.26074.39453.47168.5Z"/>
+                                        <path d="M25.62598,43.74219l-.86426-1.29688c-.18555-.2793-.49707-.44531-.83203-.44531h-3.32422c-.59375,0-1.16992-.17383-1.66406-.50391l-1.60547-1.07031c-.83691-.55762-1.33594-1.49121-1.33594-2.49609v-1.10156c0-.80078.3125-1.55469.87891-2.12109l1.82812-1.82812c.18652-.18652.29297-.44434.29297-.70703v-2.03906c0-.34961-.18652-.67871-.48633-.8584l-3.05762-1.83398c-.89844-.54004-1.45605-1.52637-1.45605-2.57324v-1.90625c0-.30469-.13672-.58984-.37598-.78125l-3.23224-2.58521c-2.13702,3.28796-3.39178,7.20007-3.39178,11.40552,0,10.01617,7.05267,18.4032,16.44977,20.48932l2.29242-6.87799c.09668-.29004.05273-.61523-.11621-.86914Z"/>
+                                        <path d="M47,32c.66998,0,1.32001.04999,1.96002.15997.02997-.38.03998-.76996.03998-1.15997,0-3.19983-.74042-6.22278-2.02576-8.93958l-2.72717,4.77258c-.36719.64258-.95508,1.12402-1.65625,1.35742l-.95117.31641c-.30957.10352-.62793.15332-.94336.15332-.89551,0-1.76953-.40137-2.34863-1.12402l-2.67383-3.3418c-.14648-.18457-.35352-.31055-.58398-.35645l-2.78809-.55762c-.44727-.08887-.89062.13086-1.09082.5332l-.65625,1.3125c-.59277,1.18555-1.86816,1.83594-3.17676,1.61719l-3.24902-.54102c-1.17871-.19629-2.12695-1.07227-2.41699-2.23145l-.45898-1.83594c-.07129-.2832-.26172-.52051-.52246-.65137l-2.52246-1.26172c-.63379-.31641-1.13672-.84961-1.41602-1.50195l-1.79169-4.18103c-1.27411,1.0083-2.42731,2.15778-3.43793,3.42999l3.31165,2.64948c.71582.57324,1.12598,1.42676,1.12598,2.34277v1.90625c0,.34961.18652.67871.48633.8584l3.05762,1.83398c.89844.54004,1.45605,1.52637,1.45605,2.57324v2.03906c0,.80078-.3125,1.55469-.87891,2.12109l-1.82812,1.82812c-.18652.18652-.29297.44434-.29297.70703v1.10156c0,.33496.16602.64648.44531.83203l1.60547,1.07031c.16504.11035.35645.16797.55469.16797h3.32422c1.00488,0,1.93848.49902,2.49609,1.33594l.86328,1.2959c.50977.7627.6416,1.74023.34961,2.6123l-2.19446,6.58423c.83954.10254,1.68903.17163,2.55579.17163,3.09003,0,6.03003-.67004,8.67999-1.89001-1.07001-1.78998-1.67999-3.88-1.67999-6.10999,0-6.62,5.38-12,12-12Z"/>
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>
+                    </div>
+                    <h3 class="value-title">Global Reach</h3>
+                    <p class="value-description">Supporting security needs worldwide with proven solutions and expert guidance.</p>
+                </div>
+
+                <div class="value-card">
+                    <div class="value-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 64 64">
+                            <g>
+                                <g id="Glyph">
+                                    <g>
+                                        <path d="M32,13c.54999,0,1,.45001,1,1v7.03998c1-.89996,3.59003-3.52997,3.59003-6.75,0-3.91998-3.81-6.95001-3.97003-7.08002-.37-.27997-.87-.27997-1.23999,0-.16003.13-3.97003,3.16003-3.97003,7.08002,0,3.22003,2.59003,5.85004,3.59003,6.75v-7.03998c0-.54999.45001-1,1-1Z"/>
+                                        <path d="M33.15997,31c1.66003,0,4.64001-.29999,6.59003-2.25,2.77002-2.77002,2.21002-7.60999,2.19-7.82001-.06-.45001-.41998-.81-.87-.87-.21002-.02002-5.04999-.58002-7.82001,2.19-.09003.08997-.16998.19-.25.27997v-1.48999c-.21002.19-.34998.31-.38.33002-.17999.14001-.40002.20996-.62.20996s-.44-.06995-.62-.20996c-.03003-.02002-.16998-.14001-.38-.33002v1.48999c-.08002-.08997-.15997-.19-.25-.27997-2.77002-2.77002-7.60999-2.21002-7.82001-2.19-.45001.06-.81.41998-.87.87-.02002.21002-.58002,5.04999,2.19,7.82001,1.95001,1.95001,4.92999,2.25,6.59003,2.25h.15997v3.09998c-2.28003.47003-4,2.48999-4,4.90002,0,.54999.45001,1,1,1h8c.54999,0,1-.45001,1-1,0-2.41003-1.71997-4.42999-4-4.90002v-3.09998h.15997ZM33,27.07996c.96997-.97998,2.06-1.84998,3.27002-2.53998.47998-.27002,1.08997-.10999,1.37.37.26996.48004.10999,1.09003-.37,1.37-1.71002.97003-3.17004,2.32001-4.27002,3.88v-3.08002ZM31,30.15997c-1.09998-1.56-2.56-2.90997-4.27002-3.88-.47998-.27997-.63995-.88995-.37-1.37.28003-.47998.89001-.64001,1.37-.37,1.21002.69,2.30005,1.56,3.27002,2.53998v3.08002Z"/>
+                                        <circle cx="48" cy="25" r="4"/>
+                                        <path d="M51.63,29.76996c-1,.78003-2.26001,1.23004-3.63,1.23004s-2.63-.45001-3.63-1.23004c-3.15997,1.39001-5.37,4.56-5.37,8.23004v6c0,.54999.45001,1,1,1h1c.55231,0,1-.44775,1-1v-7c0-.55273.44727-1,1-1s1,.44727,1,1v19c0,.55225.44769,1,1,1h1c.55231,0,1-.44775,1-1v-7c0-.55273.44727-1,1-1s1,.44727,1,1v7c0,.55225.44769,1,1,1h1c.55231,0,1-.44775,1-1v-19c0-.55273.44727-1,1-1s1,.44727,1,1v7c0,.55225.44769,1,1,1h1c.54999,0,1-.45001,1-1v-6c0-3.67004-2.21002-6.84003-5.37-8.23004Z"/>
+                                        <circle cx="16" cy="25" r="4"/>
+                                        <path d="M19.63,29.76996c-1,.78003-2.26001,1.23004-3.63,1.23004s-2.63-.45001-3.63-1.23004c-3.15997,1.39001-5.37,4.56-5.37,8.23004v6c0,.54999.45001,1,1,1h1c.55231,0,1-.44775,1-1v-7c0-.55273.44727-1,1-1s1,.44727,1,1v19c0,.55225.44769,1,1,1h1c.55231,0,1-.44775,1-1v-7c0-.55273.44727-1,1-1s1,.44727,1,1v7c0,.55225.44769,1,1,1h1c.55231,0,1-.44775,1-1v-19c0-.55273.44727-1,1-1s1,.44727,1,1v7c0,.55225.44769,1,1,1h1c.54999,0,1-.45001,1-1v-6c0-3.67004-2.21002-6.84003-5.37-8.23004Z"/>
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>
+                    </div>
+                    <h3 class="value-title">Partnership</h3>
+                    <p class="value-description">Building lasting relationships with customers, suppliers, and communities we serve.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Section -->
+    <section class="why-choose-section">
+        <div class="container">
+            <h2 class="section-title">Why Choose Rosehill Security?</h2>
+            <p class="section-subtitle">Proven advantages that make us the trusted choice for security and ballistic protection worldwide</p>
+            
+            <div class="why-choose-grid">
+                <div class="why-choose-item">
+                    <h4>No Excavation Required</h4>
+                    <p>Surface-mounted systems install directly onto existing surfaces without foundations or excavation work.</p>
+                </div>
+
+                <div class="why-choose-item">
+                    <h4>Rapid Deployment</h4>
+                    <p>Most security systems can be deployed in minutes, providing immediate protection when needed most.</p>
+                </div>
+
+                <div class="why-choose-item">
+                    <h4>Certified Protection Standards</h4>
+                    <p>IWA 14-1 certified barriers and FB6-rated ballistic protection with proven effectiveness against vehicle-borne and ballistic threats.</p>
+                </div>
+
+                <div class="why-choose-item">
+                    <h4>Sustainable Materials</h4>
+                    <p>Made from 100% recycled rubber, supporting circular economy and environmental goals.</p>
+                </div>
+
+                <div class="why-choose-item">
+                    <h4>Maintenance-Free Design</h4>
+                    <p>Robust construction designed to withstand impact, weather, and wear with minimal upkeep.</p>
+                </div>
+
+                <div class="why-choose-item">
+                    <h4>Global Proven Performance</h4>
+                    <p>Successfully deployed in security operations and training facilities from London to Los Angeles, protecting critical infrastructure, embassies, shooting ranges, and high-risk environments worldwide.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section class="mission-section">
+        <div class="container">
+            <div class="mission-content">
+                <h3>Our Mission</h3>
+                <p>To provide innovative, rapidly deployable security and ballistic protection solutions that protect people, infrastructure, training facilities, and public spaces while supporting sustainable practices and environmental responsibility.</p>
+                <p>We believe that effective security and ballistic protection should be accessible, deployable, and sustainable. By combining cutting-edge materials science with practical engineering, we create solutions that meet today's security and ballistic challenges while preparing for tomorrow's threats.</p>
+                
+                <div class="mission-highlight">
+                    <h4>Commitment to Excellence</h4>
+                    <p>Every Rosehill Security product undergoes rigorous testing and quality assurance. From initial design through manufacturing and deployment, we maintain the highest standards to ensure your security investments deliver long-term protection and value.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p><strong>Rosehill Security</strong><br>
+                    Spring Bank Mills<br>
+                    Sowerby Bridge<br>
+                    HX6 3BW, United Kingdom</p>
+                    <p>📞 +44 (0) 1422 839 456<br>
+                    📧 info@rosehillsecurity.com</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Our Solutions</h3>
+                    <ul>
+                        <li><a href="rapid-defender.html">Rapid Defender</a></li>
+                        <li><a href="impakt-defender.html">Impakt Defender</a></li>
+                        <li><a href="anti-trespass.html">Anti-Trespass Panels</a></li>
+                        <li><a href="index.html#solutions">Hostile Vehicle Mitigation</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>About Rosehill Security</h3>
+                    <p>Specialist manufacturer of security and ballistic protection systems. From rapidly deployable perimeter barriers to advanced ballistic solutions, we protect events, infrastructure, training facilities, and high-risk environments worldwide.</p>
+                    <p style="margin-top: 20px;">
+                        <strong>Certifications:</strong><br>
+                        IWA 14-1 • PAS 68 • FB6 • EN 1522/1523 • ISO 9001 • ISO 14001
+                    </p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© 2025 Rosehill Security. Part of Rosehill Polymers Ltd. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Enhanced scroll effect for header
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.style.background = 'linear-gradient(135deg, rgba(26, 54, 93, 0.98), rgba(45, 74, 113, 0.98))';
+                header.style.backdropFilter = 'blur(10px)';
+                header.style.boxShadow = '0 8px 32px rgba(0,0,0,0.15)';
+            } else {
+                header.style.background = 'linear-gradient(135deg, #1a365d, #2d4a71)';
+                header.style.backdropFilter = 'none';
+                header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+            }
+        });
+
+        // Mobile menu toggle functionality
+        const mobileToggle = document.getElementById('mobile-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileToggle.addEventListener('click', function() {
+            mobileToggle.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.mobile-nav-menu a').forEach(link => {
+            link.addEventListener('click', function() {
+                mobileToggle.classList.remove('active');
+                mobileMenu.classList.remove('active');
+            });
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!mobileToggle.contains(event.target) && !mobileMenu.contains(event.target)) {
+                mobileToggle.classList.remove('active');
+                mobileMenu.classList.remove('active');
+            }
+        });
+
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe value cards and why choose items for animation
+        document.querySelectorAll('.value-card, .why-choose-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
