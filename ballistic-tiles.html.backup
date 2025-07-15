@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anti-Ricochet Tiles - Advanced Range Safety | Rosehill Security</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Overpass:wght@300;400;500;600;700&family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            background: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        .header {
+            background: linear-gradient(135deg, #1a365d, #2d4a71);
+            color: white;
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 600;
+            font-family: 'Source Sans Pro', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo a {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .logo a:hover {
+            opacity: 0.8;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 6px;
+        }
+
+        .nav-menu a:hover {
+            background: rgba(255, 107, 53, 0.2);
+            color: #ff6b35;
+        }
+
+        .nav-menu a.active {
+            background: rgba(255, 107, 53, 0.2);
+            color: #ff6b35;
+            font-weight: 600;
+        }
+
+        .contact-btn {
+            background: #ff6b35;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        .contact-btn:hover {
+            background: #e55a2b !important;
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(26, 54, 93, 0.9), rgba(45, 74, 113, 0.9)), url('Tiles01.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 120px 0 80px;
+            margin-top: 70px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-family: 'Overpass', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            opacity: 0.95;
+            max-width: 900px;
+            margin: 0 auto 40px;
+        }
+
+        .certification-badge {
+            display: inline-block;
+            background: #ff6b35;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: #ff6b35;
+            color: white;
+            padding: 18px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: #e55a2b;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 16px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            display: inline-block;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: #ff6b35;
+            transform: translateY(-3px);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            font-family: 'Overpass', sans-serif;
+            color: #1a365d;
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #6c757d;
+            font-size: 1.2rem;
+            margin-bottom: 60px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .section-title::after {
+            content: '';
+            width: 80px;
+            height: 4px;
+            background: #ff6b35;
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Key Features Section */
+        .features-section {
+            background: white;
+            padding: 80px 0;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .feature-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: #ff6b35;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .feature-icon img {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+        }
+
+        .feature-card h3 {
+            font-family: 'Overpass', sans-serif;
+            color: #1a365d;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .feature-card p {
+            color: #6c757d;
+            line-height: 1.7;
+        }
+
+        /* Technical Specs Section */
+        .specs-section {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 80px 0;
+        }
+
+        .specs-grid {
+            display: grid;
+            grid-template-columns: 0.8fr 0.8fr 1fr;
+            gap: 40px;
+            align-items: start;
+            margin-top: 40px;
+        }
+
+        .specs-content h3 {
+            font-family: 'Overpass', sans-serif;
+            color: #1a365d;
+            font-size: 2rem;
+            margin-bottom: 30px;
+        }
+
+        .specs-list {
+            list-style: none;
+        }
+
+        .specs-list li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .specs-icon {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+
+        .specs-icon img {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+        }
+
+        .specs-table {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .specs-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .specs-table th {
+            background: linear-gradient(135deg, #1a365d, #2d4a71);
+            color: white;
+            padding: 20px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .specs-table td {
+            padding: 20px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .specs-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .specs-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        /* Applications Section */
+        .applications-section {
+            background: linear-gradient(135deg, #1a365d, #2d4a71);
+            color: white;
+            padding: 80px 0;
+        }
+
+        .applications-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .application-card {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .application-card:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .application-icon {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .application-icon svg {
+            width: 60px;
+            height: 60px;
+            fill: white;
+        }
+
+        .application-card h3 {
+            font-family: 'Overpass', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .application-card p {
+            opacity: 0.9;
+            line-height: 1.7;
+        }
+
+        /* Image Gallery Section */
+        .gallery-section {
+            background: white;
+            padding: 80px 0;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 60px;
+        }
+
+        .gallery-item {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: #ff6b35;
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-family: 'Overpass', sans-serif;
+            font-size: 2.8rem;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 25px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .btn-white {
+            background: white;
+            color: #ff6b35;
+            padding: 18px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .btn-white:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .btn-outline-white {
+            background: transparent;
+            color: white;
+            padding: 16px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            display: inline-block;
+            transition: all 0.3s ease;
+            border: 2px solid white;
+        }
+
+        .btn-outline-white:hover {
+            background: white;
+            color: #ff6b35;
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
+        .footer {
+            background: #1a365d;
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            font-family: 'Overpass', sans-serif;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: #ff6b35;
+        }
+
+        .footer-section p,
+        .footer-section li {
+            opacity: 0.9;
+            line-height: 1.8;
+            margin-bottom: 10px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #ff6b35;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 30px;
+            text-align: center;
+            opacity: 0.8;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 8px;
+            background: none;
+            border: none;
+            z-index: 1001;
+        }
+
+        .mobile-menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+
+        .mobile-menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+
+        .mobile-nav-menu {
+            display: none;
+            position: fixed;
+            top: 70px;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, #1a365d, #2d4a71);
+            flex-direction: column;
+            padding: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            z-index: 999;
+        }
+
+        .mobile-nav-menu.active {
+            display: flex;
+        }
+
+        .mobile-nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            transition: color 0.3s ease;
+        }
+
+        .mobile-nav-menu a:hover {
+            color: #ff6b35;
+        }
+
+        .mobile-nav-menu a.active {
+            color: #ff6b35;
+            font-weight: 600;
+        }
+
+        .mobile-nav-menu a:last-child {
+            border-bottom: none;
+        }
+
+        .mobile-nav-menu .contact-btn {
+            background: #ff6b35;
+            padding: 15px 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 10px;
+            border-bottom: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .nav-menu {
+                gap: 20px;
+            }
+            
+            .nav-menu a {
+                padding: 6px 12px;
+                font-size: 0.95rem;
+            }
+            
+            .contact-btn {
+                padding: 10px 18px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .specs-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .tile-image-column {
+                order: -1;
+            }
+
+            .specs-table {
+                margin-top: 0;
+            }
+
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 30px;
+            }
+
+            .applications-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 25px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 900px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .mobile-menu-toggle {
+                display: flex;
+            }
+            
+            .logo {
+                font-size: 1.6rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .applications-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .applications-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="rosehill_security_white.png" height="60" alt="Rosehill Security Logo">
+                </a>
+            </div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="security-solutions.html">Security Solutions</a></li>
+                    <li><a href="ballistic-solutions.html" class="active">Ballistic Solutions</a></li>
+                    <li><a href="about-us.html">About Us</a></li>
+                    <li><a href="contact-us.html" class="contact-btn">Contact Us</a></li>
+                </ul>
+                <button class="mobile-menu-toggle" id="mobile-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <div class="mobile-nav-menu" id="mobile-menu">
+                    <a href="index.html">Home</a>
+                    <a href="security-solutions.html">Security Solutions</a>
+                    <a href="ballistic-solutions.html" class="active">Ballistic Solutions</a>
+                    <a href="about-us.html">About Us</a>
+                    <a href="contact-us.html" class="contact-btn">Contact Us</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="certification-badge">Advanced Range Safety Technology</div>
+            <h1>Anti-Ricochet Tiles</h1>
+            <p>Engineered rubber tiles that absorb projectiles and eliminate bullet fragmentation. Create safer live-fire environments with proven ricochet protection for indoor and outdoor ranges.</p>
+            <div class="hero-buttons">
+                <a href="#specifications" class="btn-primary">View Specifications</a>
+                <a href="contact-us.html" class="btn-secondary">Request Quote</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Features Section -->
+    <section class="features-section">
+        <div class="container">
+            <h2 class="section-title">Why Choose Anti-Ricochet Tiles?</h2>
+            <p class="section-subtitle">Enhance range safety with advanced ballistic absorption technology</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <img src="frag.svg" alt="Ricochet elimination icon">
+                    </div>
+                    <h3>Ricochet Elimination</h3>
+                    <p>Absorbs projectiles on impact, preventing dangerous ricochets and bullet fragmentation that can harm shooters and damage facilities.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <img src="airbourne-lead.svg" alt="Lead reduction icon">
+                    </div>
+                    <h3>Lead Reduction</h3>
+                    <p>Significantly reduces airborne lead exposure by capturing projectiles and preventing lead dust dispersion in the shooting environment.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <img src="easy-install.svg" alt="Quick installation icon">
+                    </div>
+                    <h3>Quick Installation</h3>
+                    <p>Simple, fast installation without complex procedures. Tiles can be mounted on walls, ceilings, or floors with standard fixings.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <img src="modular.svg" alt="Modular design icon">
+                    </div>
+                    <h3>Modular Design</h3>
+                    <p>Available in multiple sizes up to 1m x 1m with various depth options to suit different calibers and range requirements.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <img src="range-safety.svg" alt="Noise reduction icon">
+                    </div>
+                    <h3>Noise Reduction</h3>
+                    <p>Helps lower noise levels in shooting environments by absorbing sound energy, creating a more comfortable training experience.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <img src="recycle.svg" alt="100% recycled icon">
+                    </div>
+                    <h3>100% Recycled</h3>
+                    <p>Manufactured from recycled rubber, supporting environmental sustainability while delivering superior ballistic performance.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Specifications -->
+    <section class="specs-section" id="specifications">
+        <div class="container">
+            <h2 class="section-title" style="color: #1a365d;">Technical Specifications</h2>
+            <div class="specs-grid">
+                <div class="specs-content">
+                    <ul class="specs-list">
+                        <li>
+                            <div class="specs-icon">
+                                <img src="height.svg" alt="Maximum size icon">
+                            </div>
+                            <div>
+                                <strong>Maximum Size:</strong><br>
+                                Up to 1m x 1m tiles
+                            </div>
+                        </li>
+                        <li>
+                            <div class="specs-icon">
+                                <img src="depth.svg" alt="Depth options icon">
+                            </div>
+                            <div>
+                                <strong>Depth Options:</strong><br>
+                                15mm / 43mm / 55mm
+                            </div>
+                        </li>
+                        <li>
+                            <div class="specs-icon">
+                                <img src="density.svg" alt="Density icon">
+                            </div>
+                            <div>
+                                <strong>Density:</strong><br>
+                                900kg/m³
+                            </div>
+                        </li>
+                        <li>
+                            <div class="specs-icon">
+                                <img src="strength.svg" alt="Tensile strength icon">
+                            </div>
+                            <div>
+                                <strong>Tensile Strength:</strong><br>
+                                1.4 N/mm²
+                            </div>
+                        </li>
+                        <li>
+                            <div class="specs-icon">
+                                <img src="resistance.svg" alt="Resistance icon">
+                            </div>
+                            <div>
+                                <strong>Resistance:</strong><br>
+                                80% Min B.S. 903/2A
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="tile-image-column" style="text-align: center;">
+                    <div style="background: white; padding: 20px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+                        <img src="Rosehill_Ballistic_Tile.jpg" alt="Rosehill anti-ricochet ballistic tile" style="width: 100%; height: auto; border-radius: 8px;">
+                        <h4 style="margin: 15px 0 8px 0; color: #1a365d; font-size: 1.1rem; font-weight: 600;">Anti-Ricochet Tile</h4>
+                        <p style="margin: 0; color: #6c757d; font-size: 0.85rem; line-height: 1.3;">Engineered rubber construction</p>
+                    </div>
+                </div>
+                <div class="specs-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Property</th>
+                                <th>Specification</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Material Composition</strong></td>
+                                <td>Recycled rubber with polyurethane binder</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Temperature Range</strong></td>
+                                <td>-20°C to +60°C</td>
+                            </tr>
+                            <tr>
+                                <td><strong>UV Stability</strong></td>
+                                <td>UV resistant for outdoor use</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Installation Method</strong></td>
+                                <td>Mechanical fixing or adhesive bonding</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Maintenance</strong></td>
+                                <td>Minimal - periodic visual inspection</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Service Life</strong></td>
+                                <td>10+ years with proper maintenance</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Applications Section -->
+    <section class="applications-section">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">Range Applications</h2>
+            <p class="section-subtitle" style="color: rgba(255,255,255,0.9);">Versatile protection for all types of shooting facilities</p>
+            
+            <div class="applications-grid">
+                <div class="application-card">
+                    <div class="application-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 64 64">
+                            <path d="M32,7c-3.59003,0-7.09003.96997-10.15002,2.77997l.10004.10004c.41998.41998.70996.95996.82001,1.54999l.5,2.59998,1.19165,1.19165c2.17877-1.39935,4.76208-2.22162,7.53833-2.22162,7.71973,0,14,6.28027,14,14s-6.28027,14-14,14-14-6.28027-14-14c0-2.77399.82104-5.35522,2.21832-7.5329l-1.30835-1.30713-2.35999-.37c-.63-.08997-1.21997-.39001-1.66998-.83997l-.09998-.10004c-1.81006,3.04999-2.78003,6.56-2.78003,10.15002,0,11.02997,8.96997,20,20,20s20-8.97003,20-20S43.03003,7,32,7Z" fill="white" stroke-width="0"/>
+                            <path d="M21.67236,20.91986c-1.05548,1.78571-1.67236,3.85986-1.67236,6.08014,0,6.61719,5.38281,12,12,12s12-5.38281,12-12c0-6.6167-5.38281-12-12-12-2.22229,0-4.2981.61804-6.08478,1.67517l2.96075,2.96082c.96033-.409,2.01611-.63599,3.12402-.63599,4.41113,0,8,3.58887,8,8s-3.58887,8-8,8-8-3.58887-8-8c0-1.10663.22638-2.16132.63446-3.12079l-2.9621-2.95935Z" fill="white" stroke-width="0"/>
+                            <path d="M31.99978,29.96354c-.77716.00039-1.55545-.27922-2.11978-.84355l-3.67041-3.66705c-.13232.49457-.20959,1.01135-.20959,1.54706,0,3.30859,2.69141,6,6,6s6-2.69141,6-6-2.69141-6-6-6c-.53668,0-1.05444.07751-1.54974.21027l3.66973,3.66973c1.13307,1.13307,1.12741,3.11252.00007,4.23993-.56039.56042-1.33977.84322-2.12028.84361Z" fill="white" stroke-width="0"/>
+                            <path d="M41.95001,46.60999c-1.76001.90002-3.66003,1.57001-5.66003,1.96997l.40936,1.42004h-9.39874l.40942-1.42004c-2-.39996-3.90002-1.06995-5.66003-1.96997l-1.74999,6.04996c-.44975,1.55483.23558,3.28069,1.81004,3.84007,1.583.55861,3.27309-.29496,3.84999-1.85005l.76398-2.64996h10.55188s.78357,2.71806.78413,2.72001c.44418,1.54068,2.38679,2.28926,3.82992,1.78002,1.49375-.5271,2.40009-2.26728,1.83004-3.78006l-1.76996-6.10999Z" fill="white" stroke-width="0"/>
+                            <path d="M16.84863,15.81641l3.0144.46069s11.42869,11.42869,11.42993,11.42993c.37489.37489,1.02386.3902,1.41406,0,.39062-.39062.39062-1.02344,0-1.41406l-11.28625-11.28625-.61023-3.19421c-.03809-.19678-.13379-.37793-.27539-.51953l-4.41406-4.41406c-.26855-.26953-.66797-.36182-1.02832-.23975s-.62012.43896-.66992.81641l-.20996,1.59863-1.83105.38086c-.35938.07471-.64941.34082-.75391.69287-.10547.35205-.00879.7334.25098.99316l4.41406,4.41406c.15039.15088.3457.24951.55566.28125Z" fill="white" stroke-width="0"/>
+                        </svg>
+                    </div>
+                    <h3>Indoor Shooting Ranges</h3>
+                    <p>Complete wall and ceiling protection for commercial and private indoor ranges, reducing lead exposure and noise levels.</p>
+                </div>
+                
+                <div class="application-card">
+                    <div class="application-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 64 64">
+                            <path d="M31,19.00034h-4c-.51001,0-.94.39001-1,.89996l-.59003,6.01001,6.99005-2-.40002-4.01001c-.06-.50995-.48999-.89996-1-.89996Z" fill="white" stroke-width="0"/>
+                            <path d="M29.73779,15.71274l.36767.73486c.56266,1.12458,2.37941.285,1.78906-.89453l-.36768-.73438c-.18555-.37158-.11279-.81787.18018-1.11133.90283-.90234,1.12598-2.27637.55518-3.41943l-.36768-.73486c-.24805-.49463-.84814-.69482-1.3418-.44727-.49414.24756-.69434.84814-.44727,1.3418l.36768.73438c.18555.37158.11279.81787-.18018,1.11133-.90283.90234-1.12598,2.27637-.55518,3.41943Z" fill="white" stroke-width="0"/>
+                            <path d="M25.3125,15.71274l.36767.73486c.57038,1.14001,2.37363.27345,1.78907-.89452l-.36768-.73438c-.18555-.37158-.11279-.81787.18018-1.11133.90283-.90234,1.12598-2.27637.55518-3.41943l-.36768-.73486c-.24707-.49463-.84863-.69482-1.3418-.44727-.49414.24756-.69434.84814-.44727,1.3418l.36768.73438c.18555.37158.11279.81787-.18018,1.11133-.90283.90234-1.12598,2.27637-.55518,3.41943Z" fill="white" stroke-width="0"/>
+                            <rect x="42" y="29.00034" width="2" height="2" fill="white" stroke-width="0"/>
+                            <rect x="14" y="47.00034" width="16" height="8" fill="white" stroke-width="0"/>
+                            <rect x="42" y="37.00034" width="2" height="2" fill="white" stroke-width="0"/>
+                            <rect x="44" y="45.00034" width="6" height="10" fill="white" stroke-width="0"/>
+                            <rect x="29" y="35.00034" width="2" height="2" fill="white" stroke-width="0"/>
+                            <rect x="14" y="43.00034" width="16" height="2" fill="white" stroke-width="0"/>
+                            <rect x="21" y="35.00034" width="2" height="2" fill="white" stroke-width="0"/>
+                            <path d="M14,32.00034v3.24561l-6.2749,1.79297c-.4292.12256-.7251.51514-.7251.96143v16c0,.55225.44775,1,1,1h4v-13c0-.55225.44775-1,1-1h18c.55225,0,1,.44775,1,1v13h3v-29.75427l-20.2749,5.79285c-.4292.12256-.7251.51514-.7251.96143ZM27,34.00034c0-.55225.44775-1,1-1h4c.55225,0,1,.44775,1,1v4c0,.55225-.44775,1-1,1h-4c-.55225,0-1-.44775-1-1v-4ZM19,34.00034c0-.55225.44775-1,1-1h4c.55225,0,1,.44775,1,1v4c0,.55225-.44775,1-1,1h-4c-.55225,0-1-.44775-1-1v-4Z" fill="white" stroke-width="0"/>
+                            <rect x="50" y="29.00034" width="2" height="2" fill="white" stroke-width="0"/>
+                            <rect x="42" y="21.00034" width="10" height="2" fill="white" stroke-width="0"/>
+                            <path d="M56,15.00034h-19v40h5v-11c0-.55225.44775-1,1-1h8c.55225,0,1,.44775,1,1v11h4c.55225,0,1-.44775,1-1V16.00034c0-.55225-.44775-1-1-1ZM46,40.00034c0,.55225-.44775,1-1,1h-4c-.55225,0-1-.44775-1-1v-4c0-.55225.44775-1,1-1h4c.55225,0,1,.44775,1,1v4ZM46,32.00034c0,.55225-.44775,1-1,1h-4c-.55225,0-1-.44775-1-1v-4c0-.55225.44775-1,1-1h4c.55225,0,1,.44775,1,1v4ZM54,40.00034c0,.55225-.44775,1-1,1h-4c-.55225,0-1-.44775-1-1v-4c0-.55225.44775-1,1-1h4c.55225,0,1,.44775,1,1v4ZM54,32.00034c0,.55225-.44775,1-1,1h-4c-.55225,0-1-.44775-1-1v-4c0-.55225.44775-1,1-1h4c.55225,0,1,.44775,1,1v4ZM54,24.00034c0,.55225-.44775,1-1,1h-12c-.55225,0-1-.44775-1-1v-4c0-.55225.44775-1,1-1h12c.55225,0,1,.44775,1,1v4Z" fill="white" stroke-width="0"/>
+                            <rect x="50" y="37.00034" width="2" height="2" fill="white" stroke-width="0"/>
+                            <path d="M54,12.00034c0-.54999-.45001-1-1-1h-6c-.54999,0-1,.45001-1,1v1h8v-1Z" fill="white" stroke-width="0"/>
+                        </svg>
+                    </div>
+                    <h3>Shoot Houses</h3>
+                    <p>360-degree protection for tactical training facilities, allowing safe live-fire exercises in confined spaces.</p>
+                </div>
+                
+                <div class="application-card">
+                    <div class="application-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 64 64">
+                            <g id="Glyph">
+                                <path d="M31,55.46002c0,.62.45001,1.10999,1,1.10999s1-.48999,1-1.10999v-11.89001h-2v11.89001Z"/>
+                                <path d="M15.33002,33.57001h13.33997c.86005,0,1.66003.23999,2.33002.64996v-2.64996c0-1.10004-1.07001-2-2.38-2h-11.23999c-1.41003,0-2.65002-.62-3.45001-1.56-.41998,1.32996-.69,2.70996-.83002,4.10999.28003.83002,1.17004,1.45001,2.23004,1.45001Z"/>
+                                <path d="M48.66998,33.57001c1.06,0,1.95001-.62,2.23004-1.45001-.14001-1.40002-.41003-2.78003-.83002-4.10999-.79999.94-2.03998,1.56-3.45001,1.56h-11.23999c-1.31,0-2.38.89996-2.38,2v2.64996c.66998-.40997,1.46997-.64996,2.33002-.64996h13.33997Z"/>
+                                <path d="M21,21.57001h8c.72998,0,1.40997.20001,2,.53998V7.42999l-.59003,2.06c-.37994,1.35999-1.06,2.59003-2,3.67999-.94,1.07001-2.08997,1.91003-3.38995,2.47998-2.25.99005-4.28003,2.36005-6.01001,4.06006.08002,1.03998.94,1.85999,1.98999,1.85999Z"/>
+                                <path d="M43,21.57001c1.04999,0,1.90997-.82001,1.98999-1.85999-1.72998-1.70001-3.76001-3.07001-6.01001-4.06006-1.29999-.56995-2.44995-1.40997-3.38995-2.47998-.94-1.08997-1.62006-2.32001-2-3.69l-.59003-2.04999v14.67999c.59003-.33997,1.27002-.53998,2-.53998h8Z"/>
+                                <path d="M17.38,27.57001h11.23999c.88,0,1.70001.23999,2.38.65997v-2.65997c0-1.10004-.90002-2-2-2h-8c-1.53003,0-2.84998-.88-3.52002-2.15002-.42999.53003-.82996,1.06-1.20996,1.63-.47003.72998-.89001,1.48999-1.27002,2.27002v.25c0,1.09998,1.07001,2,2.38,2Z"/>
+                                <path d="M46.62,27.57001c1.31,0,2.38-.90002,2.38-2v-.25c-.38-.78003-.79999-1.54004-1.27002-2.27002-.38-.57001-.77997-1.09998-1.20996-1.63-.67004,1.27002-1.98999,2.15002-3.52002,2.15002h-8c-1.09998,0-2,.89996-2,2v2.65997c.67999-.41998,1.5-.65997,2.38-.65997h11.23999Z"/>
+                                <path d="M28.66998,35.57001h-13.33997c-.84003,0-1.62-.23004-2.29004-.62.09003.94995.32001,1.85999.69,2.73999.48999,1.15997,1.17999,2.20001,2.06,3.08997,1.80005,1.80005,4.20001,2.79004,6.75,2.79004h8.46002v-6c0-1.10004-1.04999-2-2.33002-2Z"/>
+                                <path d="M48.66998,35.57001h-13.33997c-1.28003,0-2.33002.89996-2.33002,2v6h8.46002c2.54999,0,4.94995-.98999,6.75-2.79004.88-.88995,1.57001-1.92999,2.06-3.08997.37-.88.59998-1.79004.69-2.73999-.67004.38995-1.45001.62-2.29004.62Z"/>
+                            </g>
+                        </svg>
+                    </div>
+                    <h3>Outdoor Ranges</h3>
+                    <p>Weather-resistant protection for berms, sidewalls, and overhead baffles in outdoor shooting facilities.</p>
+                </div>
+                
+                <div class="application-card">
+                    <div class="application-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 48 48">
+                            <path d="M33,17.65001c-.09003.01001-15.66998.01001-15.66998.01001-.81,0-1.60004-.13-2.33002-.39001v5.39001c0,6.71002,8.40002,8.88,8.76001,8.97003.08002.01996.15997.02997.23999.02997s.15997-.01001.23999-.02997c.35999-.09003,8.76001-2.26001,8.76001-8.97003v-5.01001Z" fill="white" stroke-width="0"/>
+                            <path d="M13.04999,23.66002c-.02997-.32001-.04999-.65997-.04999-1v-5h-1c-1.65002,0-3,1.35004-3,3,0,1.66003,1.34998,3,3,3h1.04999Z" fill="white" stroke-width="0"/>
+                            <path d="M36,17.66002h-1v5c0,.34003-.02002.67999-.04999,1h1.04999c1.65002,0,3-1.33997,3-3,0-1.64996-1.34998-3-3-3Z" fill="white" stroke-width="0"/>
+                            <path d="M17.33057,15.66313h15.40186c1.80176,0,3.26758-1.46582,3.26758-3.26758,0-1.46973-.99023-2.76611-2.4082-3.15283l-14.85889-4.05225c-1.61621-.43994-3.30566-.10986-4.63818.90625-1.33105,1.01709-2.09473,2.56104-2.09473,4.23633,0,2.93896,2.39111,5.33008,5.33057,5.33008Z" fill="white" stroke-width="0"/>
+                            <rect x="18" y="37.00005" width="12" height="6" fill="white" stroke-width="0"/>
+                            <path d="M24,33.66002c-.23999,0-.48999-.02997-.72998-.08997-1.52423-.37744-3.47833-1.15594-5.27002-2.36566v3.79565h12v-3.79578c-1.79224,1.20972-3.74847,1.98834-5.28003,2.36578-.22998.06-.47998.08997-.71997.08997Z" fill="white" stroke-width="0"/>
+                            <path d="M32,29.69005v13.31h3c.54999,0,1-.45001,1-1v-6c0-2.78003-1.64001-5.20001-4-6.31Z" fill="white" stroke-width="0"/>
+                            <path d="M12,36.00005v6c0,.54999.45001,1,1,1h3v-13.31c-2.35999,1.10999-4,3.52997-4,6.31Z" fill="white" stroke-width="0"/>
+                        </svg>
+                    </div>
+                    <h3>Law Enforcement Training</h3>
+                    <p>Specialized protection for police and military training facilities requiring frequent high-volume shooting exercises.</p>
+                </div>
+                
+                <div class="application-card">
+                    <div class="application-icon">
+                        <svg id="Glyph" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 64 64">
+                            <path d="M32,25c4.96002,0,9-4.04004,9-9s-4.03998-9-9-9-9,4.03998-9,9,4.03998,9,9,9ZM30,10c.54999,0,1,.45001,1,1s-.45001,1-1,1-1-.45001-1-1,.45001-1,1-1ZM30,13c.54999,0,1,.45001,1,1s-.45001,1-1,1-1-.45001-1-1,.45001-1,1-1ZM27,12c.54999,0,1,.45001,1,1s-.45001,1-1,1-1-.45001-1-1,.45001-1,1-1Z"/>
+                            <path d="M15,25h10.67999c-.81-.57001-1.53998-1.23999-2.16998-2-.95001-1.16003-1.67999-2.52002-2.09003-4h-6.41998c-1.65002,0-2.99999,1.34996-3,2.99998-.00001,1.60551,1.34389,3.00002,3,3.00002Z"/>
+                            <path d="M52,22c0-1.60517-1.34859-3-3-3h-6.41998c-.41003,1.47998-1.14001,2.83997-2.09003,4-.63.76001-1.35999,1.42999-2.16998,2h10.67999c1.65001,0,2.99998-1.35001,3-3Z"/>
+                            <rect x="29" y="45" width="6" height="12"/>
+                            <path d="M15,56c0,.54999.45001,1,1,1h11v-13c0-.54999.45001-1,1-1h8c.54999,0,1,.45001,1,1v13h11c.54999,0,1-.45001,1-1v-29H15v29ZM40,31h4c.54999,0,1,.45001,1,1s-.45001,1-1,1h-4c-.54999,0-1-.45001-1-1s.45001-1,1-1ZM40,35h4c.54999,0,1,.45001,1,1s-.45001,1-1,1h-4c-.54999,0-1-.45001-1-1s.45001-1,1-1ZM40,39h4c.54999,0,1,.45001,1,1s-.45001,1-1,1h-4c-.54999,0-1-.45001-1-1s.45001-1,1-1ZM40,43h4c.54999,0,1,.45001,1,1s-.45001,1-1,1h-4c-.54999,0-1-.45001-1-1s.45001-1,1-1ZM40,47h4c.54999,0,1,.45001,1,1s-.45001,1-1,1h-4c-.54999,0-1-.45001-1-1s.45001-1,1-1ZM40,51h4c.54999,0,1,.45001,1,1s-.45001,1-1,1h-4c-.54999,0-1-.45001-1-1s.45001-1,1-1ZM30,31h4c.54999,0,1,.45001,1,1s-.45001,1-1,1h-4c-.54999,0-1-.45001-1-1s.45001-1,1-1ZM30,35h4c.54999,0,1,.45001,1,1s-.45001,1-1,1h-4c-.54999,0-1-.45001-1-1s.45001-1,1-1ZM30,39h4c.54999,0,1,.45001,1,1s-.45001,1-1,1h-4c-.54999,0-1-.45001-1-1s.45001-1,1-1ZM20,31h4c.54999,0,1,.45001,1,1s-.45001,1-1,1h-4c-.54999,0-1-.45001-1-1s.45001-1,1-1ZM20,35h4c.54999,0,1,.45001,1,1s-.45001,1-1,1h-4c-.54999,0-1-.45001-1-1s.45001-1,1-1ZM20,39h4c.54999,0,1,.45001,1,1s-.45001,1-1,1h-4c-.54999,0-1-.45001-1-1s.45001-1,1-1ZM20,43h4c.54999,0,1,.45001,1,1s-.45001,1-1,1h-4c-.54999,0-1-.45001-1-1s.45001-1,1-1ZM20,47h4c.54999,0,1,.45001,1,1s-.45001,1-1,1h-4c-.54999,0-1-.45001-1-1s.45001-1,1-1ZM20,51h4c.54999,0,1,.45001,1,1s-.45001,1-1,1h-4c-.54999,0-1-.45401-1-1s.45001-1,1-1Z"/>
+                            <path d="M7,36v20c0,.54999.45001,1,1,1h5v-24.62l-5.45001,2.72998c-.33997.15997-.54999.51001-.54999.89001ZM10,39c.54999,0,1,.45001,1,1s-.45001,1-1,1-1-.45001-1-1,.45001-1,1-1ZM10,43c.54999,0,1,.45001,1,1s-.45001,1-1,1-1-.45001-1-1,.45001-1,1-1ZM10,47c.54999,0,1,.45001,1,1s-.45001,1-1,1-1-.45001-1-1,.45001-1,1-1ZM10,51c.54999,0,1,.45001,1,1s-.45001,1-1,1-1-.45001-1-1,.45001-1,1-1Z"/>
+                            <path d="M56.45001,35.10999l-5.45001-2.72998v24.62h5c.54999,0,1-.45001,1-1v-20c0-.38-.21002-.73004-.54999-.89001ZM54,53c-.54999,0-1-.45001-1-1s.45001-1,1-1,1,.45001,1,1-.45001,1-1,1ZM54,49c-.54999,0-1-.45001-1-1s.45001-1,1-1,1,.45001,1,1-.45001,1-1,1ZM54,45c-.54999,0-1-.45001-1-1s.45001-1,1-1,1,.45001,1,1-.45001,1-1,1ZM54,41c-.54999,0-1-.45001-1-1s.45001-1,1-1,1,.45001,1,1-.45001,1-1,1Z"/>
+                        </svg>
+                    </div>
+                    <h3>Private Shooting Clubs</h3>
+                    <p>Cost-effective safety upgrade for club ranges, enhancing member safety and facility longevity.</p>
+                </div>
+                
+                <div class="application-card">
+                    <div class="application-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 64 64">
+                            <path d="M57,44.05499v2c0,.45001-.31.84998-.76001.96997-7.92999,1.98004-16.08002,2.97003-24.23999,2.97003s-16.31-.98999-24.23999-2.97003c-.45001-.12-.76001-.51996-.76001-.96997v-2c0-1.65997,1.34998-3,3-3h44c1.65002,0,3,1.34003,3,3Z" fill="white" stroke-width="0"/>
+                            <path d="M51,35.005h1.78741c-.63483-4.49469-2.68488-8.57581-5.78741-11.72345v7.72345c0,2.20605,1.79443,4,4,4Z" fill="white" stroke-width="0"/>
+                            <path d="M53,39.005v-1c0-.33588-.02045-.66742-.03589-1h-1.96411c-3.30859,0-6-2.69141-6-6v-9.49927c-1.3147-1.0293-2.75879-1.92126-4.33002-2.63074l1.17004,20.13h11.15997Z" fill="white" stroke-width="0"/>
+                            <path d="M17,31.005v-7.72345c-3.10254,3.14764-5.15259,7.22876-5.78741,11.72345h1.78741c2.20557,0,4-1.79395,4-4Z" fill="white" stroke-width="0"/>
+                            <path d="M23.33002,18.875c-1.57123.70947-3.01532,1.60144-4.33002,2.63074v9.49927c0,3.30859-2.69141,6-6,6h-1.96411c-.01544.33258-.03589.66412-.03589,1v1h11.15997l1.17004-20.13Z" fill="white" stroke-width="0"/>
+                            <polygon points="38.73456 20.005 25.26544 20.005 25.03503 24.005 38.96497 24.005 38.73456 20.005" fill="white" stroke-width="0"/>
+                            <circle cx="32" cy="33.005" r="3" fill="white" stroke-width="0"/>
+                            <path d="M38.55176,16.83215c-.0918-1.58496-1.40723-2.82715-2.99561-2.82715h-7.1123c-1.58838,0-2.90381,1.24219-2.99561,2.82715l-.06757,1.17285h13.23865l-.06757-1.17285Z" fill="white" stroke-width="0"/>
+                            <path d="M39.08002,25.98499c-.03003.01001-.04999.02002-.08002.02002h-14c-.03003,0-.04999-.01001-.08002-.02002l-.75,13.02002h15.66003l-.75-13.02002ZM32,38.005c-2.76001,0-5-2.23999-5-5s2.23999-5,5-5,5,2.23999,5,5-2.23999,5-5,5Z" fill="white" stroke-width="0"/>
+                        </svg>
+                    </div>
+                    <h3>Government Facilities</h3>
+                    <p>High-security installations for government and military ranges requiring maximum safety standards.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Image Gallery -->
+    <section class="gallery-section">
+        <div class="container">
+            <h2 class="section-title">Installation Gallery</h2>
+            <p class="section-subtitle">See our anti-ricochet tiles protecting ranges worldwide</p>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="Tiles01.jpg" alt="Anti-ricochet tiles installation">
+                </div>
+                <div class="gallery-item">
+                    <img src="Applications_ShootHouse.jpg" alt="Shoot house installation">
+                </div>
+                <div class="gallery-item">
+                    <img src="Tiles02.jpg" alt="Range wall protection">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Enhance Your Range Safety</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 30px;">Contact our range safety specialists to discuss your anti-ricochet tile requirements and installation options.</p>
+            <div class="cta-buttons">
+                <a href="contact-us.html" class="btn-white">Request Consultation</a>
+                <a href="#" class="btn-outline-white">Download Datasheet</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p><strong>Rosehill Security</strong><br>
+                    Spring Bank Mills<br>
+                    Sowerby Bridge<br>
+                    HX6 3BW, United Kingdom</p>
+                    <p>📞 +44 (0) 1422 839 456<br>
+                    📧 info@rosehillsecurity.com</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Our Solutions</h3>
+                    <ul>
+                        <li><strong>Security Solutions:</strong></li>
+                        <li><a href="rapid-defender.html">Rapid Defender</a></li>
+                        <li><a href="impakt-defender.html">Impakt Defender</a></li>
+                        <li><a href="anti-trespass.html">Anti-Trespass Panels</a></li>
+                        <li style="margin-top: 15px;"><strong>Ballistic Solutions:</strong></li>
+                        <li><a href="ballistic-blocks.html">Ballistic Blocks</a></li>
+                        <li><a href="ballistic-tiles.html">Ballistic Tiles</a></li>
+                        <li><a href="linatex-target-backing.html">Linatex Target Backing</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>About Rosehill Security</h3>
+                    <p>Specialist manufacturer of security and ballistic protection systems. From rapidly deployable perimeter barriers to advanced ballistic solutions, we protect events, infrastructure, training facilities, and high-risk environments worldwide.</p>
+                    <p style="margin-top: 20px;">
+                        <strong>Certifications:</strong><br>
+                        IWA 14-1 • PAS 68 • FB6 • EN 1522/1523 • ISO 9001 • ISO 14001
+                    </p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© 2025 Rosehill Security. Part of the Rosehill Group. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle functionality
+        const mobileToggle = document.getElementById('mobile-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileToggle.addEventListener('click', function() {
+            mobileToggle.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.mobile-nav-menu a').forEach(link => {
+            link.addEventListener('click', function() {
+                mobileToggle.classList.remove('active');
+                mobileMenu.classList.remove('active');
+            });
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!mobileToggle.contains(event.target) && !mobileMenu.contains(event.target)) {
+                mobileToggle.classList.remove('active');
+                mobileMenu.classList.remove('active');
+            }
+        });
+
+        // Enhanced scroll effect for header
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.style.background = 'linear-gradient(135deg, rgba(26, 54, 93, 0.98), rgba(45, 74, 113, 0.98))';
+                header.style.backdropFilter = 'blur(10px)';
+                header.style.boxShadow = '0 8px 32px rgba(0,0,0,0.15)';
+            } else {
+                header.style.background = 'linear-gradient(135deg, #1a365d, #2d4a71)';
+                header.style.backdropFilter = 'none';
+                header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        document.querySelectorAll('.feature-card, .application-card, .gallery-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
