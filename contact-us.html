@@ -11,6 +11,14 @@
     <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png">
     <link rel="manifest" href="favicon_io/site.webmanifest">
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-NDXW3ZS3');</script>
+    <!-- End Google Tag Manager -->
     <style>
         * {
             margin: 0;
@@ -712,6 +720,10 @@
     </style>
 </head>
 <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NDXW3ZS3"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
     <!-- Header -->
     <header class="header">
         <div class="header-container">
@@ -1173,6 +1185,69 @@
             el.style.transform = 'translateY(30px)';
             el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
             observer.observe(el);
+        });
+
+        // Track security product engagement and contact interactions
+        document.addEventListener('click', function(e) {
+            const target = e.target.closest('a');
+            if (!target) return;
+            
+            const href = target.getAttribute('href');
+            if (!href) return;
+            
+            // Track phone clicks
+            if (href.startsWith('tel:')) {
+                window.dataLayer = window.dataLayer || [];
+                window.dataLayer.push({
+                    'event': 'click',
+                    'click_type': 'phone_number',
+                    'business_area': 'security',
+                    'click_text': target.textContent.trim(),
+                    'click_url': href,
+                    'page_location': window.location.href
+                });
+            }
+            
+            // Track email clicks
+            if (href.startsWith('mailto:')) {
+                window.dataLayer = window.dataLayer || [];
+                window.dataLayer.push({
+                    'event': 'click',
+                    'click_type': 'email_address',
+                    'business_area': 'security', 
+                    'click_text': target.textContent.trim(),
+                    'click_url': href,
+                    'page_location': window.location.href
+                });
+            }
+            
+            // Track security/ballistic solution page access
+            if (href.includes('security-solutions.html') || href.includes('ballistic-solutions.html')) {
+                window.dataLayer = window.dataLayer || [];
+                window.dataLayer.push({
+                    'event': 'engagement',
+                    'engagement_type': 'solution_access',
+                    'business_area': 'security',
+                    'solution_type': href.includes('ballistic') ? 'ballistic_solutions' : 'security_solutions',
+                    'click_text': target.textContent.trim(),
+                    'page_location': window.location.href
+                });
+            }
+            
+            // Track product page access
+            if (href.includes('rapid-defender.html') || href.includes('impakt-defender.html') || 
+                href.includes('anti-trespass.html') || href.includes('ballistic-blocks.html') || 
+                href.includes('ballistic-tiles.html') || href.includes('linatex-target-backing.html')) {
+                window.dataLayer = window.dataLayer || [];
+                window.dataLayer.push({
+                    'event': 'engagement',
+                    'engagement_type': 'product_access',
+                    'business_area': 'security',
+                    'product_type': href.includes('ballistic') ? 'ballistic_protection' : 'security_barrier',
+                    'click_text': target.textContent.trim(),
+                    'page_location': window.location.href
+                });
+            }
         });
     </script>
 </body>
