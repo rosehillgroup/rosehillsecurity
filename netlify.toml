@@ -49,3 +49,19 @@
   for = "/*.avif"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
+
+# Redirects for broken PDF links to contact page
+[[redirects]]
+  from = "/Rosehill_Security_-_Rapid_Defender_4pp_OCT2018.pdf"
+  to = "/contact-us.html?product=rapid-defender"
+  status = 301
+
+[[redirects]]
+  from = "/Rosehill_Security_-_Impakt_Defender_Layout_NOV2023.pdf"
+  to = "/contact-us.html?product=impakt-defender"
+  status = 301
+
+[[redirects]]
+  from = "/Rosehill_Security_-_Anti-Trespass_web_NOV2018.pdf"
+  to = "/contact-us.html?product=anti-trespass"
+  status = 301
