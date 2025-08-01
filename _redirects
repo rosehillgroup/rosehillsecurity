@@ -1,2 +1,14 @@
+# Clean URLs - redirect to canonical .html version
+/impakt-defender /impakt-defender.html 301!
+/rapid-defender /rapid-defender.html 301!
+/ballistic-tiles /ballistic-tiles.html 301!
+/ballistic-blocks /ballistic-blocks.html 301!
+/ballistic-solutions /ballistic-solutions.html 301!
+/anti-trespass /anti-trespass.html 301!
+/linatex-target-backing /linatex-target-backing.html 301!
+/security-solutions /security-solutions.html 301!
+/about-us /about-us.html 301!
+/contact-us /contact-us.html 301!
+
 # Form submission redirect
 /thank-you.html  /thank-you.html  200
