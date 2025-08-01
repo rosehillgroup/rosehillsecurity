@@ -777,15 +777,42 @@
 
             .applications-grid {
                 grid-template-columns: 1fr;
+                gap: 30px;
+                margin: 40px 0;
             }
 
             .applications-grid .application-card:nth-child(4),
             .applications-grid .application-card:nth-child(5) {
+                grid-column: auto;
+                grid-row: auto;
                 margin: 0;
+            }
+            
+            .application-card {
+                padding: 30px 20px;
+                max-width: 100%;
+                box-sizing: border-box;
+                margin: 0 auto;
             }
 
             .gallery-grid {
                 grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .applications-grid {
+                gap: 20px;
+                margin: 30px 0;
+            }
+            
+            .application-card {
+                padding: 25px 15px;
+            }
+            
+            .application-icon {
+                width: 60px;
+                height: 60px;
             }
         }
     </style>
@@ -1187,7 +1214,7 @@
                     <p>Specialist manufacturer of security and ballistic protection systems. From rapidly deployable perimeter barriers to advanced ballistic solutions, we protect events, infrastructure, training facilities, and high-risk environments worldwide.</p>
                     <p style="margin-top: 20px;">
                         <strong>Certifications:</strong><br>
-                        IWA 14-1 • PAS 68 • FB6 • EN 1522/1523 • ISO 9001 • ISO 14001
+                        IWA 14-1 • PAS 68 • FB6 • EN 1522/1523 • ISO 9001
                     </p>
                 </div>
             </div>
