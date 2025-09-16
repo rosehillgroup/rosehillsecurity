@@ -1,3 +1,21 @@
+# Netlify Redirects Configuration for Rosehill Security
+# Redirects from rosehillsecurity.com AND rosehilldefence.com to security.rosehill.group
+
+# Force old domains to new subdomain - rosehillsecurity.com
+https://rosehillsecurity.com/* https://security.rosehill.group/:splat 301!
+http://rosehillsecurity.com/* https://security.rosehill.group/:splat 301!
+https://www.rosehillsecurity.com/* https://security.rosehill.group/:splat 301!
+http://www.rosehillsecurity.com/* https://security.rosehill.group/:splat 301!
+
+# Force old domains to new subdomain - rosehilldefence.com
+https://rosehilldefence.com/* https://security.rosehill.group/:splat 301!
+http://rosehilldefence.com/* https://security.rosehill.group/:splat 301!
+https://www.rosehilldefence.com/* https://security.rosehill.group/:splat 301!
+http://www.rosehilldefence.com/* https://security.rosehill.group/:splat 301!
+
+# Force HTTPS
+http://security.rosehill.group/* https://security.rosehill.group/:splat 301!
+
 # Clean URLs - redirect to canonical .html version
 /impakt-defender /impakt-defender.html 301!
 /rapid-defender /rapid-defender.html 301!
@@ -12,3 +30,6 @@
 
 # Form submission redirect
 /thank-you.html  /thank-you.html  200
+
+# Catch-all for orphaned pages - redirect to homepage
+/* /index.html 301
