@@ -1,6 +1,10 @@
 [build]
   publish = "."
 
+[[edge_functions]]
+  path = "/*"
+  function = "geo-cookie"
+
 # Form handling
 [forms]
   # Enable form processing
