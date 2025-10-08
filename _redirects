@@ -16,20 +16,31 @@ http://www.rosehilldefence.com/* https://security.rosehill.group/:splat 301!
 # Force HTTPS
 http://security.rosehill.group/* https://security.rosehill.group/:splat 301!
 
-# Clean URLs - redirect to canonical .html version
-/impakt-defender /impakt-defender.html 301!
-/rapid-defender /rapid-defender.html 301!
-/ballistic-tiles /ballistic-tiles.html 301!
-/ballistic-blocks /ballistic-blocks.html 301!
-/ballistic-solutions /ballistic-solutions.html 301!
-/anti-trespass /anti-trespass.html 301!
-/linatex-target-backing /linatex-target-backing.html 301!
-/security-solutions /security-solutions.html 301!
-/about-us /about-us.html 301!
-/contact-us /contact-us.html 301!
+# Clean URLs - remove .html extension (redirect .html to clean)
+/about-us.html /about-us 301
+/contact-us.html /contact-us 301
+/thank-you.html /thank-you 301
+/impakt-defender.html /impakt-defender 301
+/rapid-defender.html /rapid-defender 301
+/ballistic-tiles.html /ballistic-tiles 301
+/ballistic-blocks.html /ballistic-blocks 301
+/ballistic-solutions.html /ballistic-solutions 301
+/anti-trespass.html /anti-trespass 301
+/linatex-target-backing.html /linatex-target-backing 301
+/security-solutions.html /security-solutions 301
 
-# Form submission redirect
-/thank-you.html  /thank-you.html  200
+# Serve HTML files without extension
+/about-us /about-us.html 200
+/contact-us /contact-us.html 200
+/thank-you /thank-you.html 200
+/impakt-defender /impakt-defender.html 200
+/rapid-defender /rapid-defender.html 200
+/ballistic-tiles /ballistic-tiles.html 200
+/ballistic-blocks /ballistic-blocks.html 200
+/ballistic-solutions /ballistic-solutions.html 200
+/anti-trespass /anti-trespass.html 200
+/linatex-target-backing /linatex-target-backing.html 200
+/security-solutions /security-solutions.html 200
 
-# Catch-all for orphaned pages - redirect to homepage
-/* /index.html 301
+# Fallback for 404 errors
+/* /404.html 404
