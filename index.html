@@ -30,10 +30,15 @@
     <link rel="manifest" href="favicon_io/site.webmanifest">
     
     <!-- Critical Image Preloading -->
-    <link rel="preload" as="image" href="rosehill_security_white.avif" type="image/avif">
-    <link rel="preload" as="image" href="rosehill_security_white.webp" type="image/webp">
-    <link rel="preload" as="image" href="rosehill_security_white.png" type="image/png">
-    
+    <link rel="preload" as="image" href="rosehill_security_white.avif" type="image/avif" fetchpriority="high">
+    <link rel="preload" as="image" href="rosehill_security_white.webp" type="image/webp" fetchpriority="high">
+    <link rel="preload" as="image" href="rosehill_security_white.png" type="image/png" fetchpriority="high">
+
+    <!-- Hero Image Preloading -->
+    <link rel="preload" as="image" href="hero-background.avif" type="image/avif" fetchpriority="high">
+    <link rel="preload" as="image" href="hero-background.webp" type="image/webp" fetchpriority="high">
+    <link rel="preload" as="image" href="hero-background.jpg" type="image/jpeg" fetchpriority="high">
+
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
